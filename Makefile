@@ -10,9 +10,11 @@ all: mains maind
 
 mains: main.o myBank.a
 	$(CC) $(FLAG) -g -o mains main.o myBank.a
+
 	
 maind: main.o myBank.so
 	$(CC) $(FLAG) -g -o maind main.o ./myBank.so
+
 	
 myBank.a: $(Bank)
 	$(AR) rcs -o myBank.a myBank.o
@@ -29,3 +31,8 @@ main.o : myBank.h main.c
 .PHONY: clean all
 clean:
 	rm -f *.o *.a *.so mains maind
+
+
+
+
+
