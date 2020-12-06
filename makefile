@@ -31,8 +31,3 @@ main.o : myBank.h main.c
 .PHONY: clean all
 clean:
 	rm -f *.o *.a *.so mains maind
-
-
-
-
-
