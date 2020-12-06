@@ -19,11 +19,11 @@ int New_Account(double x){
 		}
 	}
 	if(a == -1){
-	printf("there is no space for another account \n");
+	printf("there is no space for another account.\n");
 	return 0;
 	}
 	else{
-	printf("the new account is %d \n",a);
+	printf("New account number is: %d \n",a);
 	return 0;
 	}
 return 0;
@@ -31,50 +31,66 @@ return 0;
 
 double Balance (int x){
 	if(Accounts[0][x-901] != (x)){
-		printf("the account doesnt exist \n");
+		printf("This account is closed\n");
 		return 0;
 	}
+	if(x<900 || x>950){
+	printf("Invalid account number\n");
+		return 0;	
+	}
 	double b = Accounts[1][x-901];
-	printf("the current balance is %0.2lf \n",b);
+	printf("The balance of account number %dis: %0.2lf\n" ,x , b);
 	return 0;
 }
 
 double Deposit (int x, double y){
 	if(Accounts[0][x-901] != x){
-		printf("the account doesnt exist \n");
+		printf("This account is closed\n");
 		return 0;
+	}
+	if(x<900 || x>950){
+		printf("Invalid account number\n");
+		return 0;	
 	}
 	Accounts[1][x-901] += y;
 	double b = Accounts[1][x-901];
-	printf("the new balance is %0.2lf \n",b);
+	printf("The new balance is: %0.2lf \n",b);
 	return 0;
 }
 
 double Withrawal (int x, double y){
 	if(Accounts[0][x-901] != x){
-		printf("the account doesnt exist \n");
+		printf("This account is closed\n");
 		return 0;
+	}
+	if(x<900 || x>950){
+		printf("Invalid account number\n");
+		return 0;	
 	}
 	int c = Accounts[1][x-901] - y;
 	if(c >0){
 		Accounts[1][x-901] -= y;
 		double b = Accounts[1][x-901];
-		printf("the new balance is %0.2lf \n",b);
+		printf("The new balance is: %0.2lf\n",b);
 		return 0;
 	}
-	printf("you dont have enough money in your account \n");
+	printf("Cannot withdraw more than the balance\n");
 	return 0;
 }
 
 int Close_Account (int x){
 	if(Accounts[0][x-901] != x){
-		printf("the account doesnt exist \n");
+		printf("This account is already closed\n");
 		return 0;
+	}
+		if(x<900 || x>950){
+		printf("Invalid account number\n");
+		return 0;	
 	}
 	Accounts[0][x-901] = 0;
 	Accounts[1][x-901] = 0;
 	counter --;
-	printf("this account is closed \n");
+	printf("Closed account number %d\n",x);
 	return 0;
 }
 
@@ -102,7 +118,7 @@ int Close_Accounts (){
 		}
 	}
 	counter = 0;
-	printf("all the accounts are empty \n");
+	//printf("all the accounts are empty \n");
 	return 0;
 }
 int cleaner(){

@@ -8,9 +8,8 @@ int main() {
 	int n;
 	int flag1;
 	int flag2;
-	printf("please choose your action \n to open new account press O \n to get your balance press B \n to deposit press D \n to withrawal press W \n to close your account press C \n interest press I \n print all accounts press P \n to close all accounts press E \n");
 	while(end != 1){
-		printf("what is your choose?\n");
+		printf("Please choose a transaction type:\n O-Open Account\n B-Balance Inquiry\n D-Deposit\n W-Withdrawal\n C-Close Account\n I-Interest\n P-Print\n E-Exit\n");
 		scanf(" %c", &c);
 		cleaner();
 		d = 0;
@@ -19,24 +18,25 @@ int main() {
 		flag2 = 0;
 		switch(c){
 			case 'O':
-				printf("please enter first deposit amount:");
+				printf("Please enter amount for deposit: ");
 				flag1 = scanf("%lf", &d);
 				cleaner();
 				if(flag1 == 1){
 					if(d>0){
-						New_Account(d);
-						break;
+					New_Account(d);
+					break;
 					}
 					else{
-						printf("amount must be positive. \n");
+						printf("Invalid Amount\n");
 					}
-				}
+					}
 				else{
-					printf("invaild amount. \n");
+					printf("Failed to read the amount\n");
 				}
 				break;
+				
 			case 'B':
-				printf("please enter your account number:");
+				printf("Please enter account number: ");
 				flag1 = scanf("%d", &n);
 				cleaner();
 				if(flag1 == 1){
@@ -44,10 +44,11 @@ int main() {
 					break;
 				}
 				else{
-					printf("invaild account number.\n");
+					printf("Failed to read the account number\n");
 				}
+				break;
 			case 'D':
-				printf("please enter your account number:");
+				printf("Please enter account number: ");
 				flag1 = scanf("%d", &n);
 				cleaner();
 				if (flag1 == 1){
@@ -55,23 +56,28 @@ int main() {
 					flag2 = scanf("%lf", &d);
 					cleaner();
 					if(flag2 == 0){
-						Deposit(n,d);
-						break;
-					}
-					else{
-						printf("invaild deposit.\n");
-					}
-				}
+						if(d>0){
+							Deposit(n,d);
+							break;
+							}
+						else{ 
+							printf("Cannot deposit a negative amount\n");
+						}
+						}
+					else {
+						printf("Failed to read the amount\n");
+						}
+						}
 				else{
-					printf("invaild account number.\n");
+					printf("Failed to read the account number\n");
 				}
 				break;
 			case 'W':
-				printf("please enter your account number:");
+				printf("Please enter account number: ");
 				flag1 = scanf("%d", &n);
 				cleaner();
 				if(flag1 == 1){
-					printf("how much you want to withrawal?:");
+					printf("Please enter the amount to withdraw: ");
 					flag2 = scanf("%lf", &d);
 					cleaner();
 					if(flag2 ==1 ){
@@ -80,11 +86,11 @@ int main() {
 					}
 				}
 				else{
-					printf("invaild account number.\n");
+					printf("Failed to read the account number\n");
 				}
 				break;
 			case 'C':
-				printf("please enter the account number:");
+				printf("Please enter account number: ");
 				flag1 = scanf("%d", &n);
 				cleaner();
 				if(flag1 == 1){
@@ -92,19 +98,24 @@ int main() {
 					break;
 				}
 				else{
-					printf("invaild account number.\n");
+					printf("Failed to read the account number\n");
 				}
 				break;
 			case 'I':
-				printf("what is the interest?:");
+				printf("Please enter interest rate: ");
 				flag1 = scanf("%lf", &d);
+				cleaner();
 				if(flag1 == 1){
-					Interest(d);
-					cleaner();
+					if(d<0){
+						printf("Invalid interest rate\n");
+					}
+					else{
+						Interest(d);
 					break;
+					}
 				}
 				else{
-					printf("invaild interest.\n");
+					printf("Failed to read the interest rate\n");
 				}
 				break;
 			case 'P':
@@ -112,12 +123,10 @@ int main() {
 				break;
 			case 'E':
 				Close_Accounts();
-				printf("\n bye bye \n");
 				end = 1;
 				break;
-	
 			default:
-				printf("incorrect char!\n");
+				printf("Invalid transaction type\n");
 		}
 	}
 	return 0;
